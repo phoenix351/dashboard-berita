@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Unduh Data</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/kpr.css" rel="stylesheet">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/datepicker3.css" rel="stylesheet">
+    <link href="css/styles.css" rel="stylesheet">
+    <!--Custom Font-->
+    <link href="css/google_font.css" rel="stylesheet">
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" href="css/kpr.css">
+    <script src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/moment.min.js"></script>
+    <script type="text/javascript" src="js/daterangepicker.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/daterangepicker.css" />
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.12.0/css/all.css">
+    <script src="js/Chart.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/myLib.js"></script>
+    <script src="js/unduh.js"></script>
+    <style>
+        body{
+            background-color: rgba(101, 4, 186,0.2);
+            font-family: sans-serif;
+        }
+        .navbar{
+            background-color: #5a07a3;
+        }
+        li{
+            margin-top: 1px;
+        }
+        li:hover{
+
+        }
+        li{
+            margin-top: 1px;
+        }
+        a.nav-item.active{
+            background:  #5a07a3;
+            
+        }
+        a.nav-item.active li{
+            color:#ffffff;
+        }
+        @media (min-width: 768px) {
+            .container{
+                padding-left: 210px
+                }
+            .content{
+                margin-top:60px;
+                margin-left: 10px
+                }
+            .sidebar{
+                width: 250px;
+                margin-right: -250px;
+                }
+            }
+       .spinner-border{
+        position: absolute;
+        left:50%;
+        top:50%;
+       }
+       .card-body{
+        min-height: 200px
+       }
+        .tombol-side{
+        
+        
+        
+        
+        borde-radius:5px;
+        margin-bottom: 0px;
+        transition: all 0.5s;
+        width: auto;
+        position: relative;
+        color:#000000;
+        padding: 0.3rem 0.5rem 0.3rem 0.5rem;
+
+
+        
+       }
+       .tombol-side::after {
+            content: "\f105";
+            font-family: "Font Awesome 5 Pro";
+            font-weight: 800;
+            font-size:15px;
+            position: absolute;
+            left: 80%;
+            top:52%;
+            right: 0;
+            bottom: 0;
+            opacity: 0;
+            
+            transform: translate(-50%, -50%);
+
+        }
+        .tombol-side:hover {
+            background: #5a07a3;
+            transition: all 0.5s;
+            border-radius: 1px;
+           border:0.1px;
+           
+            padding: 0.3rem 0rem 0.3rem 1.5rem;
+            border-style: solid none solid none;
+            color: #ffffff;
+            border-color: #ca8fff;
+        }
+        .tombol-side:hover::after {
+            opacity: 1;
+            transition: all 0.5s;
+            color: #ffffff;
+            padding: 0rem 0rem 0rem 2.5rem;
+
+            }
+       .tombol{
+        
+        background: #3903a6;
+        color: #1d1d1d;
+        border:none;
+        borde-radius:5px;
+        margin-bottom: 5px;
+        transition: all 0.5s;
+        width: auto;
+        position: relative;
+        color:#ffffff;
+        padding: 0.3rem 0.5rem 0.3rem 0.5rem;
+
+
+        
+       }
+       .tombol::after {
+            content: "\f021";
+            font-family: "Font Awesome 5 Pro";
+            font-weight: 400;
+            position: absolute;
+            left: 80%;
+            top:47%;
+            right: 0;
+            bottom: 0;
+            opacity: 0;
+            
+            transform: translate(-50%, -50%);
+
+        }
+        .tombol:hover {
+            background: #631bf5;
+            transition: all 0.5s;
+            border-radius: 5px;
+            box-shadow: 0px 6px 15px #0000ff61;
+            padding: 0.3rem 3rem 0.3rem 1.5rem;
+            
+            color: #ffffff;
+        }
+        .tombol:hover::after {
+            opacity: 1;
+            transition: all 0.5s;
+            color: #ffffff;
+
+            }
+        .card{
+                border-radius:1px;
+                box-shadow: 2px 2px 3px black;
+                text-align: center;
+
+            }
+        .card-header{
+            background-color: #ffffff;
+            font-family: sans-serif;
+            padding: 15px 5px 15px 5px;
+            color:#000000;
+        }
+        #reportrange{
+            background: #fff;
+            cursor: pointer;
+            padding: 5px 10px 0px 15px;
+            border: 1px solid #ccc;
+            border-radius: 1px;
+            width: 100%;
+            height: 36px;
+            margin-left: 15px;
+            text-align: center;
+            } 
+        .input-boks{
+            background: #fff;
+            padding: 5px 10px 5px 15px;
+            border: 1px solid #ccc;
+            border-radius: 1px;
+            width: 100%;
+            height: 36px;
+            margin-left: 0px;
+            text-align: center;
+        }
+.invalid-feedback{
+    width: 200%;
+    font-size: 90%;
+}
+       
+input#cari, input#batas{
+    margin-bottom: 15px;
+    width: 297px;
+    height: 40px;
+}
+
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <nav class="navbar fixed-top navbar-expand-lg navbar-dark" role="navigation">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#sidebar-collapse"><span class="sr-only">Toggle navigation</span>
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <a class="navbar-brand" href="/"><span>Twitta</span>Dashboard</a>
+                </div>
+            </div><!-- /.container-fluid -->
+        </nav>
+        <nav class="col-sm-3 col-lg-2 sidebar">
+            <div class="profile-sidebar">
+                <div class="profile-userpic">
+                    <img src="icons/user_icon.webp" class="img-responsive" alt="foto profil">
+                </div>
+                <div class="profile-usertitle">
+                    <div class="profile-usertitle-name">Pengguna</div>
+                    <div class="profile-usertitle-status"><span class="indicator label-success"></span>Online</div>
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div class="divider"></div>
+             <ul class="nav flex-column ">
+                <a class="nav-item tombol-side" href="/">
+                    <li class="nav-link"><em class="fa fa-dashboard">&nbsp;</em> Dashboard
+                    </li>
+                </a>
+                 <a class="nav-item tombol-side" href="/analisis">
+                    <li class="nav-link"><em class="fa fa-bar-chart">&nbsp;</em> Analisis</li>
+                </a>
+                <a class="nav-item tombol-side" href="/twitter">
+                    <li class="nav-link"><em class="fab fa-twitter">&nbsp;</em> Twitter</li>
+                </a>
+                <a class="nav-item active tombol-side" href="/unduh">
+                    <li class="nav-link"><em class="fa fa-download">&nbsp;</em>
+                        Unduh Data</li>
+                </a>
+               
+                <a class="nav-item  tombol-side" href="/panduan">
+                    <li class="nav-link"><em class="fa fa-clone">&nbsp;</em>
+                        Panduan</li>
+                </a>
+                <a class="nav-item  tombol-side" href="/login">
+                    <li class="nav-link"><em class="fa fa-power-off">&nbsp;</em>
+                        Keluar</li>
+                </a>
+            </ul>
+        </nav>
+        <div class="content">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Unduh Data Berita</h5>
+                </div>
+                <div class="card-body text-left">
+                    <form class="needs-validation" id="myform">
+                        <div class="form-group row">
+                            <div class="col-sm-3">
+                                <label for="reportrange">Rentang Waktu</label>
+                            </div>
+                            <div id="reportrange" class="col-sm-4">
+                                <i class="fa fa-calendar" style="margin: auto"></i>&nbsp;
+                                <span style="margin: auto"></span> <i class="fa fa-caret-down" style="margin: auto"></i>
+                            </div>
+                        </div>
+                      <div class="form-group row">
+                        
+                        <div class="col-sm-4 offset-sm-3">
+                            <input id="cari"type="text" class="form-control form-control-sm" placeholder="Masukkan Kata Kunci...">
+                        </div>
+                        <div class="col-sm-4 offset-sm-3">
+                            <input id="batas"type="number" class="form-control form-control-sm" placeholder="Masukkan Jumlah Berita">
+                        </div>
+                      </div>
+                        
+                        <div class="form-group row">
+                            <div class="col-sm-3">
+                            </div>
+                            <div class="col-sm-4">
+                                <button type="button" class="btn btn-md tombol" id="cek-btn" data-toggle="modal">Periksa</button>
+                            </div>
+                            <div class="spinner-border loading-anim" id="loading-anim" role="status" style="display: none">
+                                <span class="sr-only">Loading...</span>
+                            </div>
+                            <!-- Modal -->
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- Modal -->
+        <div class="modal fade bd-example-modal-lg" id="modal-unduh" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Pratinjau Data</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="table-responsive" style="max-height: 400px">
+                            <table class="table table-hover table-bordered">
+                                <thead>
+                                    <tr id="trhead-modal">
+                                    </tr>
+                                </thead>
+                                <tbody id="tbody-modal">
+                                </tbody>
+                            </table>
+                        </div>
+                        Total Data : <span id='total-baris'></span>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                        <a id="unduh-btn"><button type="button" class="btn btn-primary">Unduh</button></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

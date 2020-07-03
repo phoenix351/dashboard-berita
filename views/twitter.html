@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Twitter Analytics</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/kpr.css" rel="stylesheet">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/datepicker3.css" rel="stylesheet">
+    <link href="css/styles.css" rel="stylesheet">
+    <!--Custom Font-->
+    <link href="css/google_font.css" rel="stylesheet">
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" href="css/kpr.css">
+    <script src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/moment.min.js"></script>
+    <script type="text/javascript" src="js/daterangepicker.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/daterangepicker.css" />
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.12.0/css/all.css">
+    <script src="js/Chart.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/myLib.js"></script>
+    <script src="js/twitter.js"></script>
+    <style>
+        body{
+            background-color: rgba(101, 4, 186,0.2);
+            font-family: sans-serif;
+        }
+        .navbar{
+            background-color: #5a07a3;
+        }
+        li{
+            margin-top: 1px;
+        }
+        li:hover{
+
+        }
+        li{
+            margin-top: 1px;
+        }
+        a.nav-item.active{
+            background:  #5a07a3;
+            
+        }
+        a.nav-item.active li{
+            color:#ffffff;
+        }
+        .canvas-wrapper{
+            min-height: 400px;
+            background-color: #ffffff;
+        }
+        @media (min-width: 768px) {
+            .container{
+                padding-left: 212px;
+                max-width:1338px;
+                }
+
+            .content{
+                margin-top:60px;
+                margin-left: 10px
+                }
+            .sidebar{
+                width: 250px;
+                margin-right: -250px;
+                }
+            }
+       .spinner-border{
+        position: absolute;
+        left:50%;
+        top:50%;
+       }
+       .card-body{
+        min-height: 200px
+       }
+
+        .tombol-side{
+        
+        
+        
+        
+        borde-radius:5px;
+        margin-bottom: 0px;
+        transition: all 0.5s;
+        width: auto;
+        position: relative;
+        color:#000000;
+        padding: 0.3rem 0.5rem 0.3rem 0.5rem;
+
+
+        
+       }
+       .tombol-side::after {
+            content: "\f105";
+            font-family: "Font Awesome 5 Pro";
+            font-weight: 800;
+            font-size:15px;
+            position: absolute;
+            left: 80%;
+            top:52%;
+            right: 0;
+            bottom: 0;
+            opacity: 0;
+            
+            transform: translate(-50%, -50%);
+
+        }
+        .tombol-side:hover {
+            background: #5a07a3;
+            transition: all 0.5s;
+            border-radius: 1px;
+           border:0.1px;
+           
+            padding: 0.3rem 0rem 0.3rem 1.5rem;
+            border-style: solid none solid none;
+            color: #ffffff;
+            border-color: #ca8fff;
+        }
+        .tombol-side:hover::after {
+            opacity: 1;
+            transition: all 0.5s;
+            color: #ffffff;
+            padding: 0rem 0rem 0rem 2.5rem;
+
+            }
+       .tombol{
+        
+        background: #3903a6;
+        color: #1d1d1d;
+        border:none;
+        borde-radius:5px;
+        margin-bottom: 5px;
+        transition: all 0.5s;
+        width: auto;
+        position: relative;
+        color:#ffffff;
+        
+
+
+        
+       }
+       .tombol::after {
+            content: "\f021";
+            font-family: "Font Awesome 5 Pro";
+            font-weight: 400;
+            position: absolute;
+            left: 80%;
+            top:47%;
+            right: 0;
+            bottom: 0;
+            opacity: 0;
+            
+            transform: translate(-50%, -50%);
+
+        }
+        .tombol:hover {
+            background: #631bf5;
+            transition: all 0.5s;
+            border-radius: 5px;
+            box-shadow: 0px 6px 15px #0000ff61;
+            padding: 0.3rem 3rem 0.3rem 1.5rem;
+            
+            color: #ffffff;
+        }
+        .tombol:hover::after {
+            opacity: 1;
+            transition: all 0.5s;
+            color: #ffffff;
+
+            }
+        .card{
+                border-radius:1px;
+                box-shadow: 2px 2px 3px black;
+                text-align: center;
+
+            }
+        .card-header{
+            background-color: #ffffff;
+            font-family: sans-serif;
+            padding: 15px 5px 15px 5px;
+            color:#000000;
+        }
+        #reportrange{
+            background: #fff;
+            cursor: pointer;
+            padding: 5px 10px 0px 15px;
+            border: 1px solid #ccc;
+            border-radius: 1px;
+            width: 100%;
+            height: 36px;
+            margin-left: 15px;
+            text-align: center;
+            } 
+        .input-boks{
+            background: #fff;
+            padding: 5px 10px 5px 15px;
+            border: 1px solid #ccc;
+            border-radius: 1px;
+            width: 100%;
+            height: 36px;
+            margin-left: 0px;
+            text-align: center;
+        }
+.invalid-feedback{
+    width: 200%;
+    font-size: 90%;
+}
+       
+input#cari, input#batas{
+    margin-bottom: 15px;
+    width: 297px;
+    height: 40px;
+}
+thead{
+    background-color: #5a07a3;
+    color:#ffffff;
+    font-weight: 100;
+    text-align: center;
+}
+#nav-tom{
+    top:100px;
+}
+.monitor-tab{
+    background-color: #5a07a3;
+    color:#ffffff;
+    margin-bottom: 0px;
+        transition: all 0.5s;
+        width: auto;
+        position: relative;
+        padding: 0.5rem 1.5rem 0.5rem 1.5rem;
+
+
+        
+       }
+       .monitor-tab::after {
+            
+            font-family: "Font Awesome 5 Pro";
+            font-weight: 800;
+            font-size:15px;
+            position: absolute;
+            left: 80%;
+            top:52%;
+            right: 0;
+            bottom: 0;
+            opacity: 0;
+            
+            transform: translate(-50%, -50%);
+
+        }
+        #btn-tab1::after{
+            content: "\f201";
+        }
+        #btn-tab2::after{
+            content: "\f57e";
+        }
+       .monitor-tab:hover {
+            background: #c824ff;
+            color: #ffffff;
+            transition: all 0.5s;
+            border-radius: 1px;
+           border:0.1px;
+           
+            padding: 0.5rem 1.8rem 0.5rem 0.8rem;
+            border-style: solid none solid none;
+            
+            border-color: #ca8fff;
+        }
+        .monitor-tab:hover::after {
+            opacity: 1;
+            transition: all 0.5s;
+            color: #ffffff;
+            padding: 0rem 1.0rem 0rem 2.5rem;
+        }
+        .monitor-tab.active{
+            background: #c824ff;
+            color: #ffffff;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <nav class="navbar fixed-top navbar-expand-lg navbar-dark" role="navigation">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#sidebar-collapse"><span class="sr-only">Toggle navigation</span>
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <a class="navbar-brand" href="/"><span>Twitta</span>Dashboard</a>
+                </div>
+            </div><!-- /.container-fluid -->
+        </nav>
+        <nav class="col-sm-3 col-lg-2 sidebar">
+            <div class="profile-sidebar">
+                <div class="profile-userpic">
+                    <img src="icons/user_icon.webp" class="img-responsive" alt="foto profil">
+
+                </div>
+                <div class="profile-usertitle">
+                    <div class="profile-usertitle-name">Pengguna</div>
+                    <div class="profile-usertitle-status"><span class="indicator label-success"></span>Online</div>
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div class="divider"></div>
+            <ul class="nav flex-column ">
+                <a class="nav-item tombol-side" href="/">
+                    <li class="nav-link"><em class="fa fa-dashboard">&nbsp;</em> Dashboard
+                    </li>
+                </a>
+                <a class="nav-item tombol-side" href="/analisis">
+                    <li class="nav-link"><em class="fa fa-bar-chart">&nbsp;</em> Analisis</li>
+                </a>
+                <a class="nav-item active tombol-side" href="/twitter">
+                    <li class="nav-link"><em class="fab fa-twitter">&nbsp;</em> Twitter</li>
+                </a>
+                <a class="nav-item tombol-side" href="/unduh">
+                    <li class="nav-link"><em class="fa fa-download">&nbsp;</em>
+                        Unduh Data</li>
+                </a>
+                <a class="nav-item  tombol-side" href="/panduan">
+                    <li class="nav-link"><em class="fa fa-clone">&nbsp;</em>
+                        Panduan</li>
+                </a>
+                <a class="nav-item  tombol-side" href="/login">
+                    <li class="nav-link"><em class="fa fa-power-off">&nbsp;</em>
+                        Keluar</li>
+                </a>
+            </ul>
+        </nav>
+        <div class="spinner-border" id="m-load" role="status" style="position: fixed;top:47%;left:55%;z-index: 2000;display: none">
+            <span class="sr-only">Loading...</span>
+        </div>
+        <div id="nav-tom" class="content container-fluid">
+            <button type="button" class="btn mb-2 monitor-tab active" id="btn-tab1">Twitter Monitoring</button>
+            <button type="button" class="btn mb-2 monitor-tab" id="btn-tab2">Twitter Live Analytics</button>
+        </div>
+        <hr>
+        <div id="monitoring" class="content container-fluid">
+            <div class="row">
+                <form class="form-inline">
+                    <div class="form-group mx-sm-3 mb-2">
+                        <select id="monitor-keyword" class="form-control">
+                            <option selected disabled value="default">--- Pilih Keyword Monitoring ---</option>
+                            <option value="covid">Corona / Covid - 19</option>
+                            <option value="indikator">Indikator BPS</option>
+                        </select>
+                    </div>
+                    <button type="button" class="btn tombol mb-2" id="monitor-pilih">Terapkan</button>
+                </form>
+            </div>
+            <hr>
+            <div id="row-indikator" class="row" style="margin-bottom: 15px">
+                <div class="col-12">
+                    <div class="canvas-wrapper" id="twit-indikator">
+                        <canvas id="monitor-indikator-bar"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div id="monitor-perhari" class="col-6">
+                    <div class="canvas-wrapper" id="monitor-hari">
+                        <canvas id="monitor-hari-bar"></canvas>
+                    </div>
+                </div>
+                <div id="monitor-lokasi" class="col-6">
+                    <div class="canvas-wrapper" id="twit-lokasi">
+                        <canvas id="monitor-lokasi-bar"></canvas>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div id="popular-wrap">
+                <div class="row">
+                    <div class="col-6">
+                        <div class="table-responsive">
+                            <h4>Cuitan Popular Hari ini</h4>
+                            <table class="table table-hover table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th class="text-right">No</th>
+                                        <th>Nama Pengguna</th>
+                                        <th>Status</th>
+                                        <th>Jumlah Retweet</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="monitor-popular-today">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="table-responsive">
+                            <h4>Cuitan Popular Seminggu Terakhir</h4>
+                            <table class="table table-hover table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th class="text-right">No</th>
+                                        <th>Nama Pengguna</th>
+                                        <th>Status</th>
+                                        <th>Jumlah Retweet</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="monitor-popular">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="live" class="content container-fluid" style="display: none">
+            <div class="row">
+                <form class="form-inline">
+                    <div class="form-group mx-sm-3 mb-2">
+                        <input id="keyword" type="text" class="form-control" placeholder="Masukkan Kata Kunci...">
+                    </div>
+                    <button type="button" class="btn tombol mb-2" id="pilih">Terapkan</button>
+                </form>
+            </div>
+            <hr>
+            <div class="row">
+                <div id="twit-perhari" class="col-6">
+                    <div class="canvas-wrapper" id="twit-hari">
+                        <canvas id="twit-hari-bar"></canvas>
+                    </div>
+                </div>
+                <div id="twit-lokasi" class="col-6">
+                    <div class="canvas-wrapper" id="twit-lokasi">
+                        <canvas id="twit-lokasi-bar"></canvas>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-6">
+                    <div class="table-responsive">
+                        <h4>Cuitan Popular Hari ini</h4>
+                        <table class="table table-hover table-bordered">
+                            <thead>
+                                <tr>
+                                    <th class="text-right">No</th>
+                                    <th>Nama Pengguna</th>
+                                    <th>Status</th>
+                                    <th>Jumlah Retweet</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tabel-popular-today">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="table-responsive">
+                        <h4>Cuitan Popular Seminggu Terakhir</h4>
+                        <table class="table table-hover table-bordered">
+                            <thead>
+                                <tr>
+                                    <th class="text-right">No</th>
+                                    <th>Nama Pengguna</th>
+                                    <th>Status</th>
+                                    <th>Jumlah Retweet</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tabel-popular">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</body>
+
+</html>

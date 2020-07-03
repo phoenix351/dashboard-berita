@@ -1,0 +1,318 @@
+
+
+
+body {
+    background-color: rgba(101, 4, 186, 0.2);
+    font-family: sans-serif;
+}
+
+.navbar {
+    background-color: #5a07a3;
+}
+
+li {
+    margin-top: 1px;
+}
+
+li:hover {}
+
+li {
+    margin-top: 1px;
+}
+
+a.nav-item.active {
+    background: #5a07a3;
+
+}
+
+a.nav-item.active li {
+    color: #ffffff;
+}
+
+@media (min-width: 768px) {
+    .container {
+        padding-left: 242px;
+        max-width: 1338px;
+    }
+
+    .content {
+
+        margin-left: -20px
+    }
+
+    .container-fluid {
+
+        margin-left: -20px
+    }
+
+    .sidebar {
+        width: 250px;
+        margin-right: -250px;
+    }
+
+    #btn-kat {
+        position: absolute;
+        top: 46%;
+        left: 0%
+    }
+
+    #ner,
+    #sentimen,
+    #sna {
+        width: 1100px;
+
+    }
+}
+
+.spinner-border {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+}
+
+.card-body {
+    min-height: 400px
+}
+
+.tombol-side {
+
+
+
+
+    borde-radius: 5px;
+    margin-bottom: 0px;
+    transition: all 0.5s;
+    width: auto;
+    position: relative;
+    color: #000000;
+    padding: 0.3rem 0.5rem 0.3rem 0.5rem;
+
+
+
+}
+
+.tombol-side::after {
+    content: "\f105";
+    font-family: "Font Awesome 5 Pro";
+    font-weight: 800;
+    font-size: 15px;
+    position: absolute;
+    left: 80%;
+    top: 52%;
+    right: 0;
+    bottom: 0;
+    opacity: 0;
+
+    transform: translate(-50%, -50%);
+
+}
+
+.tombol-side:hover {
+    background: #5a07a3;
+    transition: all 0.5s;
+    border-radius: 1px;
+    border: 0.1px;
+
+    padding: 0.3rem 0rem 0.3rem 1.5rem;
+    border-style: solid none solid none;
+    color: #ffffff;
+    border-color: #ca8fff;
+}
+
+.tombol-side:hover::after {
+    opacity: 1;
+    transition: all 0.5s;
+    color: #ffffff;
+    padding: 0rem 0rem 0rem 2.5rem;
+
+}
+
+.tombol {
+
+    background: #3903a6;
+    color: #1d1d1d;
+    border: none;
+    borde-radius: 5px;
+    margin-bottom: 5px;
+    transition: all 0.5s;
+    width: auto;
+    position: relative;
+    color: #ffffff;
+    padding: 0.3rem 0.5rem 0.3rem 0.5rem;
+
+
+
+}
+
+.tombol::after {
+
+
+    font-weight: 400;
+    position: absolute;
+    left: 80%;
+    top: 47%;
+    right: 0;
+    bottom: 0;
+    opacity: 0;
+
+    transform: translate(-50%, -50%);
+
+}
+
+.tombol:hover {
+    background: #631bf5;
+    transition: all 0.5s;
+    border-radius: 10px;
+    box-shadow: 0px 6px 15px #0000ff61;
+    padding: 0.3rem 3rem 0.3rem 1.5rem;
+    text-decoration: none;
+    color: #ffffff;
+}
+
+.tombol:hover::after {
+    opacity: 1;
+    transition: all 0.5s;
+    color: #ffffff;
+
+}
+
+.card {
+    border-radius: 1px;
+    box-shadow: 2px 2px 3px black;
+    text-align: center;
+    width: 1066px;
+
+}
+
+.card-header {
+    background-color: #ffffff;
+    font-family: sans-serif;
+    padding: 15px 5px 15px 5px;
+    color: #000000;
+}
+
+.canvas-wrapper {}
+
+#reportrange {
+    background: #fff;
+    cursor: pointer;
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 2px;
+    width: 100%;
+    height: 32px;
+}
+
+.nav-tabs li a {
+    padding: 10px 15px;
+    color: #ffffff;
+    background-color: mediumpurple;
+}
+
+.nav-tabs li a:hover {
+    border-radius: 1px;
+    padding: 15px 20px;
+    transition: all 0.5s;
+    padding: 15px 20px;
+    ;
+    color: mediumpurple;
+    background-color: #ffffff;
+}
+
+.nav-tabs li.active a {
+    border-radius: 1px;
+
+    transition: all 0.5s;
+
+    color: #000000;
+    background-color: #ffffff;
+}
+
+.links line {
+    stroke: #999;
+    stroke-opacity: 0.4;
+}
+
+.nodes circle {
+    stroke: #fff;
+    stroke-width: 2px;
+}
+
+.monitor-tab {
+    background-color: #5a07a3;
+    color: #ffffff;
+    margin-bottom: 0px;
+    transition: all 0.5s;
+    width: auto;
+    position: relative;
+    padding: 0.5rem 1.5rem 0.5rem 1.5rem;
+
+
+
+}
+
+.monitor-tab::after {
+
+    font-family: "Font Awesome 5 Pro";
+    font-weight: 800;
+    font-size: 15px;
+    position: absolute;
+    left: 80%;
+    top: 52%;
+    right: 0;
+    bottom: 0;
+    opacity: 0;
+
+    transform: translate(-50%, -50%);
+
+}
+
+#tab-entitas::after {
+    content: "\f0c0";
+}
+
+#tab-sentimen::after {
+    content: "\f4b4";
+}
+
+#tab-sna::after {
+    content: "\f78a";
+
+}
+
+thead {
+    background-color: #5a07a3;
+    color: #ffffff;
+    font-weight: 100;
+    text-align: center;
+}
+
+.monitor-tab:hover {
+    background: #c824ff;
+    color: #ffffff;
+    transition: all 0.5s;
+    border-radius: 1px;
+    border: 0.1px;
+
+    padding: 0.5rem 2.5rem 0.5rem 0.5rem;
+    border-style: solid none solid none;
+
+    border-color: #ca8fff;
+}
+
+.monitor-tab:hover::after {
+    opacity: 1;
+    transition: all 0.5s;
+    color: #ffffff;
+    padding: 0rem 1.0rem 0rem 2.0rem;
+}
+
+.monitor-tab.active {
+    background: #c824ff;
+    color: #ffffff;
+}
+
+#nav-tom {
+    margin-top: 10px;
+    margin-bottom: -50px;
+}

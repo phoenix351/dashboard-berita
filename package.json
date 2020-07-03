@@ -1,0 +1,25 @@
+{
+  "name": "berita-dashboard",
+  "version": "1.0.0",
+  "description": "Aplikasi Dashboard Berita ",
+  "main": "index.html",
+  "scripts": {
+    "start": "npm start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://git.heroku.com/aplikasi-dashboard.git"
+  },
+  "keywords": [
+    "dashboard",
+    "berita",
+    "aplikasi",
+    "analisis"
+  ],
+  "author": "Ponimin",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "http-proxy-middleware": "^1.0.4"
+  }
+}

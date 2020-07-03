@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Analisis</title>
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/kpr.css" rel="stylesheet">
+    <link href="../css/font-awesome.min.css" rel="stylesheet">
+    <link href="../css/styles.css" rel="stylesheet">
+    <!--Custom Font-->
+    <link href="../css/google_font.css" rel="stylesheet">
+    
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+    <script src="../js/jquery.js"></script>
+    <script src="../js/bootstrap.js"></script>
+    <link rel="stylesheet" href="../css/kpr.css">
+    <script src="../js/Chart.min.js"></script>
+    <script src="../js/myLib.js"></script>
+    <script src='../js/d3.v4.min.js'></script>
+    <script src="../js/analisis.js"></script>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.12.0/css/all.css">
+    <link rel="stylesheet" href="css/analisis.css">
+    <link rel="stylesheet" href="css/sunburst.css">
+    <script>
+        $(document).ready(function() {
+            $(".nav-tabs a").click(function() {
+                $(this).tab('show');
+
+                console.log($(this))
+            });
+        });
+        </script>
+</head>
+
+<body>
+    <div class="container">
+        <nav class="navbar fixed-top navbar-expand-lg navbar-dark" role="navigation">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#sidebar-collapse"><span class="sr-only">Toggle navigation</span>
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <a class="navbar-brand" href="/"><span>Twitta</span>Dashboard</a>
+                </div>
+            </div><!-- /.container-fluid -->
+        </nav>
+        <nav class="col-sm-3 col-lg-2 sidebar">
+            <div class="profile-sidebar">
+                <div class="profile-userpic">
+                    <img src="icons/user_icon.webp" class="img-responsive" alt="foto profil">
+                </div>
+                <div class="profile-usertitle">
+                    <div class="profile-usertitle-name">Pengguna</div>
+                    <div class="profile-usertitle-status"><span class="indicator label-success"></span>Online</div>
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div class="divider"></div>
+            <ul class="nav flex-column ">
+                <a class="nav-item tombol-side" href="/">
+                    <li class="nav-link"><em class="fa fa-dashboard">&nbsp;</em> Dashboard
+                    </li>
+                </a>
+                <a class="nav-item active tombol-side" href="/analisis">
+                    <li class="nav-link"><em class="fa fa-bar-chart">&nbsp;</em> Analisis</li>
+                </a>
+                <a class="nav-item tombol-side" href="/twitter">
+                    <li class="nav-link"><em class="fab fa-twitter">&nbsp;</em> Twitter</li>
+                </a>
+                <a class="nav-item tombol-side" href="/unduh">
+                    <li class="nav-link"><em class="fa fa-download">&nbsp;</em>
+                        Unduh Data</li>
+                </a>
+                <a class="nav-item  tombol-side" href="/panduan">
+                    <li class="nav-link"><em class="fa fa-clone">&nbsp;</em>
+                        Panduan</li>
+                </a>
+                <a class="nav-item  tombol-side" href="/login">
+                    <li class="nav-link"><em class="fa fa-power-off">&nbsp;</em>
+                        Keluar</li>
+                </a>
+            </ul>
+        </nav>
+        <!--/.sidebar-->
+        <!-- Nav tabs -->
+        <div class="container-fluid">
+            <h1 class="page-header text-dark">Analisis Data Berita</h1>
+        </div>
+        <div id="nav-tom" class="container-fluid">
+            <button type="button" class="btn mb-2 monitor-tab active" id="tab-entitas">Analisis Entitas</button>
+            <button type="button" class="btn mb-2 monitor-tab" id="tab-sentimen">Analisis Sentimen</button>
+            <button type="button" class="btn mb-2 monitor-tab" id="tab-sna">Social Network Analysis</button>
+        </div>
+        <br><br>
+        <hr>
+        <div class="container-fluid">
+            <div class="tab-content">
+                <div id="ner" class="content container-fluid" style="display:block;">
+                    <!-- Zoomable sunburst -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="page-header">Jumlah Entitas pada klasifikasi Indikator BPS</h5>
+                        </div>
+                        <div class="card-body text-center">
+                            <div style="display: none" class="spinner-border" id="load-line" role="status">
+                                <span class="sr-only">Loading...</span>
+                            </div>
+                            <!-- container for the graph -->
+                            <div class="card-body" id="indikator-wrapper" style="text-align: center">
+                                <div id="main">
+                                    
+                                    <div id="chart">
+                                        <div id="explanation" style="visibility: hidden;">
+                                            <span id="percentage"></span><br />
+                                            Berita, dari Total Berita yang terkait Indikator BPS
+                                        </div>
+                                    </div>
+                                    <div id="sequence"></div>
+                                </div>
+                                                            
+                               
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <h5 class="text-center col-6 offset-3">Entitas Berdasarkan Kategori Indikator</h5>
+                    </div>
+                    <div class="text-center col-6  offset-3">
+                        <select list="ner-kat" class="form form-control mb-2 menuindikator" name="ner-kat" id="ner-kat">
+                            <datalist id="kategori">
+                                
+                                <option>Ekspor-Impor</option>
+                                <option>Transportasi</option>
+                                <option>Pendidikan</option>
+                                <option>Kesehatan</option>
+                                <option>Fertilitas</option>
+                                <option>Mortalitas</option>
+                                <option>Morbiditas</option>
+                                <option>Kependudukan</option>
+                                <option>Kemiskinan dan Ketimpangan</option>
+                                <option>Indeks Harga Perdagangan Besar</option>
+                                <option>Inflasi</option>
+                                <option>Indeks Tendensi Bisnis</option>
+                                <option>Indeks Tendensi Konsumen</option>
+                                <option>Nilai Tukar Petani</option>
+                                <option>Pariwisata</option>
+                                <option>PDB/PDRB</option>
+                                <option>Pertumbuhan Produksi Industri</option>
+                                <option>Lainnya</option>
+                            </datalist>
+                        </select>
+                    </div>
+                    <!-- Top Tokoh-->
+                    <hr>
+                    <div class="row">
+                        <div class="col-6">
+                            <h4 class="page-header">Entitas Tokoh</h4>
+                            <div class="table-responsive">
+                                <table class="table table-hover table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-right">Nomor</th>
+                                            <th>Nama Tokoh</th>
+                                            <th>Jumlah Berita</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tabel-tokoh">
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- Top Jabatan / posisi-->
+                        <div class="col-6">
+                            <h4 class="page-header"> Entitas Posisi</h4>
+                            <div class="table-responsive">
+                                <table class="table table-hover table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-right">Nomor</th>
+                                            <th>Nama Posisi</th>
+                                            <th>Jumlah Berita</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tabel-posisi">
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Top indikator-->
+                    <hr>
+                    <div class="row">
+                        <div class="col-6">
+                            <h4 class="page-header">Entitas Lokasi</h4>
+                            <div class="table-responsive">
+                                <table class="table table-hover table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-right">Nomor</th>
+                                            <th>Nama Lokasi</th>
+                                            <th>Jumlah Berita</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tabel-lokasi">
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- Top Organisasi-->
+                        <div class="col-6">
+                            <h4 class="page-header">Entitas Organisasi</h4>
+                            <div class="table-responsive">
+                                <table class="table table-hover table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-right">Nomor</th>
+                                            <th>Nama Organisasi</th>
+                                            <th>Jumlah Berita</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tabel-organisasi">
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="sentimen" class="content container-fluid" style="display:none;">
+                    <!-- Zoomable sunburst -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Sentimen Berita Indikator</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="row" style="margin-bottom: 20px">
+                                <div class="col-sm-4 offset-sm-2">
+                                    <label for="sentimen-kat" class="pull-left">Pilih Kategori Indikator :</label></div>
+                                <div class="col-sm-4">
+                                    <select list="sentimen-kat" class="form form-control menuindikator" name="sentimen-kat" id="sentimen-kat">
+                                        <datalist id="kategori">
+                                            <option>Ekspor-Impor</option>
+                                            <option>Transportasi</option>
+                                            <option>Pendidikan</option>
+                                            <option>Kesehatan</option>
+                                            <option>Fertilitas</option>
+                                            <option>Mortalitas</option>
+                                            <option>Morbiditas</option>
+                                            <option>Kependudukan</option>
+                                            <option>Kemiskinan dan Ketimpangan</option>
+                                            <option>Indeks Harga Perdagangan Besar</option>
+                                            <option>Inflasi</option>
+                                            <option>Indeks Tendensi Bisnis</option>
+                                            <option>Indeks Tendensi Konsumen</option>
+                                            <option>Nilai Tukar Petani</option>
+                                            <option>Pariwisata</option>
+                                            <option>PDB/PDRB</option>
+                                            <option>Pertumbuhan Produksi Industri</option>
+                                            <option>Lainnya</option>
+                                        </datalist>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="spinner-border" id="bar-load1" role="status">
+                                    <span class="sr-only">Loading...</span>
+                                </div>
+                                <div class="col-lg-6">
+                                    <h5> Sentimen Isi Berita </h5>
+                                    <div class="canvas-wrapper" id="utama-chart1" style="width: 400px;height: 200px">
+                                        <canvas id="uchart1"></canvas>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <h5> Sentimen Entitas Kutipan </h5>
+                                    <div class="canvas-wrapper" id="utama-chart2" style="width: 400px;height: 200px">
+                                        <canvas id="uchart2"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="sna" class="content container-fluid" style="display:none;">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Hubungan antara Indikator dan Tokoh Publik</h3>
+                        </div>
+                        <div class="card-body">
+                            <svg id="graph-sna" width="905" height="1000"></svg>
+                            <center><svg id="graphsna-legend" height="50" width="550"></svg></center>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Hubungan antar Tokoh Publik</h3>
+                        </div>
+                        <div class="card-body">
+                            <svg id="graph-sna2" width="905" height="700"></svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</body>
+
+</html>
