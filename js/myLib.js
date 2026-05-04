@@ -165,28 +165,31 @@ function set_score_board() {
         contentType: 'application/json',
         dataType: 'json',
         success: function(result) {
-
-            $("#total-berita").html(result['sum_berita']['totalberita'].toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1."));
-            $("#total-sumber").html(result['sum_berita']['totalsumber'].toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1."));
-            $("#berita-bps").html(result['sum_berita']['totalberita_bps'].toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1."));
-            for (i in result['sum_sentimen']) {
-
-                nilai_ = String(result['sum_sentimen'][i]['jumlah'])
-                nilai_ = nilai_.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.");
-                kelas_ = String(result['sum_sentimen'][i]['sentimen'])
-                if (kelas_ == 'positif') {
-                    $("#total-positif").html(nilai_);
-                }
-                if (kelas_ == 'negatif') {
-                    $("#total-negatif").html(nilai_);
-                }
-                if (kelas_ == 'netral') {
-                    $("#total-netral").html(nilai_);
-                }
+            if (!result || !result['sum_berita']) {
+                console.error("Invalid API response for score board");
+                return;
             }
 
-
-
+            $("#total-berita").html((result['sum_berita']['totalberita'] || 0).toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1."));
+            $("#total-sumber").html((result['sum_berita']['totalsumber'] || 0).toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1."));
+            $("#berita-bps").html((result['sum_berita']['totalberita_bps'] || 0).toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1."));
+            
+            if (result['sum_sentimen'] && Array.isArray(result['sum_sentimen'])) {
+                for (i in result['sum_sentimen']) {
+                    nilai_ = String(result['sum_sentimen'][i]['jumlah'] || 0)
+                    nilai_ = nilai_.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.");
+                    kelas_ = String(result['sum_sentimen'][i]['sentimen'])
+                    if (kelas_ == 'positif') {
+                        $("#total-positif").html(nilai_);
+                    }
+                    if (kelas_ == 'negatif') {
+                        $("#total-negatif").html(nilai_);
+                    }
+                    if (kelas_ == 'netral') {
+                        $("#total-netral").html(nilai_);
+                    }
+                }
+            }
         }
 
     });
@@ -204,29 +207,30 @@ function set_line(mulai, selesai) {
         dataType: 'json',
         success: function(result) {
             console.log(result)
+            if (!Array.isArray(result)) {
+                console.error("Expected array from getdaily_sumber");
+                return;
+            }
             // prepare data received
             var dk, dr, dd, da = [];
             var data_kompas = result.filter(function(res) {
-                return res['sumber'].toLowerCase() === 'kompas'
+                return res['sumber'] && res['sumber'].toLowerCase() === 'kompas'
             });
             var data_republika = result.filter(function(res) {
-                return res['sumber'].toLowerCase() === 'republika'
+                return res['sumber'] && res['sumber'].toLowerCase() === 'republika'
             });
             var data_detik = result.filter(function(res) {
-                return res['sumber'].toLowerCase() === 'detik'
+                return res['sumber'] && res['sumber'].toLowerCase() === 'detik'
             });
             var data_antara = result.filter(function(res) {
-                return res['sumber'].toLowerCase() === 'antara'
+                return res['sumber'] && res['sumber'].toLowerCase() === 'antara'
             });
             var data_okezone = result.filter(function(res) {
-                return res['sumber'].toLowerCase() === 'okezone'
+                return res['sumber'] && res['sumber'].toLowerCase() === 'okezone'
             });
 
             var data_bisnis = result.filter(function(res) {
-                return res['sumber'].toLowerCase() === 'bisnis'
-            });
-            var data_okezone = result.filter(function(res) {
-                return res['sumber'].toLowerCase() === 'okezone'
+                return res['sumber'] && res['sumber'].toLowerCase() === 'bisnis'
             });
 
 
@@ -267,12 +271,16 @@ function set_bar(mulai, selesai) {
         dataType: 'json',
         success: function(result) {
             console.log(result)
+            if (!Array.isArray(result)) {
+                console.error("Expected array from getsum_sumber");
+                return;
+            }
 
             var data = [];
             var label = [];
             for (row in result) {
-                var x = result[row].sumber;
-                var y = result[row].jumlah;
+                var x = result[row].sumber || "Unknown";
+                var y = result[row].jumlah || 0;
                 data[row] = y
                 label[row] = x;
             }

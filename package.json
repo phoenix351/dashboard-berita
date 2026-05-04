@@ -4,7 +4,10 @@
   "description": "Aplikasi Dashboard Berita ",
   "main": "index.html",
   "scripts": {
-    "start": "npm start"
+    "start": "node index.js",
+    "frontend-install": "cd frontend && npm install",
+    "frontend-dev": "cd frontend && npm run dev",
+    "frontend-build": "cd frontend && npm run build"
   },
   "repository": {
     "type": "git",

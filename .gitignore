@@ -1,0 +1,9 @@
+node_modules/
+venv/
+.env
+.idea/
+*.log
+db-lite.db
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
